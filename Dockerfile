@@ -11,7 +11,7 @@ RUN curl https://www.hex-rays.com/products/ida/support/flexlm/lmadmin-x64_lsb-11
 RUN curl https://www.hex-rays.com/products/ida/support/flexlm/x64_lsb/hexrays --output /opt/lmadmin/hexrays
 RUN chmod +x /opt/lmadmin/hexrays
 
-VOLUME /opt/lmadmin/config/
+VOLUME /opt/lmadmin/conf/
 VOLUME /opt/lmadmin/licenses/
 
 # webui
