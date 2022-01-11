@@ -1,6 +1,9 @@
 FROM ubuntu:20.04
 
-RUN apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get install -y lsb-core
+#RUN apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get install -y lsb-core curl
+
+RUN ln -s /lib64/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
+RUN apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get install -y curl
 
 RUN mkdir -p /opt/lmadmin
 
