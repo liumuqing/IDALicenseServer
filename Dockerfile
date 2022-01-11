@@ -9,10 +9,9 @@ RUN curl https://www.hex-rays.com/products/ida/support/flexlm/x64_lsb/hexrays --
 RUN chmod +x /opt/lmgrd/hexrays
 
 #COPY lmgrd /opt/lmgrd/
-RUN curl https://www.hex-rays.com/products/ida/support/flexlm/x64_lsb/hexrays --output /opt/lmgrd/lmgrd
+RUN curl https://hex-rays.com/products/ida/support/flexlm/x64_lsb/lmgrd --output /opt/lmgrd/lmgrd
 RUN chmod +x /opt/lmgrd/lmgrd
 
-VOLUME /opt/lmgrd/conf/
 VOLUME /opt/lmgrd/licenses/
 
 RUN mkdir -p /usr/tmp/
