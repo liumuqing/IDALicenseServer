@@ -3,6 +3,7 @@ name: Docker
 on:
   push:
     branches: [ lmadmin, lmgrd ]
+    tags: ['lmgrd-*', 'lmadmin-*']
 
 env:
   IMAGE_NAME: liumuqing/ida_license_server
