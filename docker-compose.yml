@@ -1,7 +1,7 @@
 version: '3.7'
 services:
     license_server:
-        image: liumuqing/ida_license_server
+        image: liumuqing/ida_license_server:lmadmin
         restart: always
         mac_address: ${MAC_ADDRESS}
         networks:
