@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  license_server:
+    labels:
+      - "ida_proxied=true"
+    image: liumuqing/ida_license_server:lmgrd
+    restart: always
+    expose:
+      - "27000"
+      - "26999"
+    ports:
+      - "127.0.0.1:0:27000"
+      - "127.0.0.1:0:26999"
+    volumes:
+      - ./licenses/:/opt/lmgrd/licenses/:ro
+    environment:
+      - LICENSE_PATH=/opt/lmgrd/licenses/ida.lic
+      - HOOK_MAC_ADDRESS=${MAC_ADDRESS}
+  lb:
+    image: 'yyyar/gobetween'
+    network_mode: host
+    restart: always
+    depends_on:
+      - license_server
+    ports:
+      - '27000:27000'
+      - '26999:26999'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./gobetween.toml:/etc/gobetween/conf/gobetween.toml:ro
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '5'
+        max-size: '10m'

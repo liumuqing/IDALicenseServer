@@ -1,3 +1,8 @@
+FROM gcc:10.4 as compiler
+COPY ./hook_mac_address /opt/hook_mac_address
+RUN make -C /opt/hook_mac_address
+
+
 FROM ubuntu:20.04 as downloader
 
 RUN apt-get -y update && DEBIAN_FRONTEND=noninteractive apt-get install -y curl upx-ucl
@@ -14,6 +19,9 @@ FROM ubuntu:20.04
 RUN ln -s /lib64/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
 RUN mkdir -p /opt/lmgrd/
 COPY --from=downloader /opt/lmgrd/ /opt/lmgrd/
+COPY --from=compiler /opt/hook_mac_address /opt/hook_mac_address
+RUN echo '/opt/hook_mac_address/hook_mac_address.so' >> /etc/ld.so.preload
+
 VOLUME /opt/lmgrd/licenses/
 
 RUN mkdir -p /usr/tmp/

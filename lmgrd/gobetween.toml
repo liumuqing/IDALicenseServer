@@ -1,0 +1,42 @@
+[logging]
+level = "info"
+output = "stdout"
+format = "text"
+
+[servers.ida26999]
+bind = "0.0.0.0:26999"
+protocol = "tcp"
+balance = "iphash1"
+
+  [servers.ida26999.discovery]
+    interval = "10s"
+    timeout = "2s"
+    kind = "docker"
+    docker_endpoint = "unix:///var/run/docker.sock" # (required) Endpoint to docker API
+    docker_container_label = "ida_proxied=true"   # (optional) Label to filter containers
+    docker_container_private_port = 26999        # (required) Private port of container to use
+  [servers.ida26999.healthcheck]
+    fails = 1
+    passes = 1
+    interval = "2s"
+    timeout = "1s"
+    kind = "ping"
+
+[servers.ida27000]
+bind = "0.0.0.0:27000"
+protocol = "tcp"
+balance = "iphash1"
+
+  [servers.ida27000.discovery]
+    interval = "10s"
+    timeout = "2s"
+    kind = "docker"
+    docker_endpoint = "unix:///var/run/docker.sock" # (required) Endpoint to docker API
+    docker_container_label = "ida_proxied=true"   # (optional) Label to filter containers
+    docker_container_private_port = 27000        # (required) Private port of container to use
+  [servers.ida27000.healthcheck]
+    fails = 1
+    passes = 1
+    interval = "2s"
+    timeout = "1s"
+    kind = "ping"

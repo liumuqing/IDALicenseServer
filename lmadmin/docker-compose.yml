@@ -1,18 +1,15 @@
 version: '3.7'
 services:
     license_server:
-        image: liumuqing/ida_license_server:lmgrd
+        image: liumuqing/ida_license_server:lmadmin
         restart: always
         mac_address: ${MAC_ADDRESS}
         networks:
             - internal
-        environment:
-            - LICENSE_PATH=/licenses/ida.lic
-        volumes:
-            - ./licenses/:/licenses/
         expose:
-            - "27000"
+            - "8090"
             - "26999"
+            - "27000"
     proxy_27000:
         restart: always
         depends_on:
@@ -27,6 +24,20 @@ services:
             - tcp-connect:license_server:27000
         ports:
             - 27000:27000
+    proxy_8090:
+        restart: always
+        depends_on:
+            - license_server
+        image: alpine/socat
+        restart: always
+        networks:
+            - internal
+            - external
+        command:
+            - tcp-listen:8090,fork
+            - tcp-connect:license_server:8090
+        ports:
+            - 8090:8090
     proxy_26999:
         restart: always
         depends_on:
