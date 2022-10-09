@@ -8,4 +8,4 @@
 6. enjoy your license server
 
 ## Note
-1. checkout [lmadmin](https://github.com/liumuqing/IDALicenseServer/tree/lmadmin/) if you prefer webui.
+1. checkout [lmadmin](https://github.com/liumuqing/IDALicenseServer/tree/master/lmadmin/) if you prefer webui.

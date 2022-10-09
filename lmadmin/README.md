@@ -12,4 +12,4 @@
 5. enjoy your license server
 
 ## Note
-1. checkout [lmgrd](https://github.com/liumuqing/IDALicenseServer/tree/lmgrd/) if you prefer console only version.
+1. checkout [lmgrd](https://github.com/liumuqing/IDALicenseServer/tree/master/lmgrd/) if you prefer console only version.
